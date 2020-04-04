@@ -1,6 +1,14 @@
 const webpack = require('webpack');
+const path = require('path');
 
-module.exports = module.exports = function override(config, env) {
+const aliasForWeb = ([folder]) => path.resolve(`./src/.web-aliases/${folder}`);
+
+module.exports = module.exports = function override(config) {
+  const webAliases = {
+    'react-native' /* import to override */: aliasForWeb`react-native` /* the path within the alias folder */,
+  };
+  Object.assign(config.resolve.alias, webAliases);
+
   // Let's force our code to bundle using the same bundler react native does.
   config.plugins.push(new webpack.DefinePlugin({__DEV__: true}));
   config.module.rules.push({
