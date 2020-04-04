@@ -5,7 +5,10 @@ module.exports = module.exports = function override(config, env) {
   config.plugins.push(new webpack.DefinePlugin({__DEV__: true}));
   config.module.rules.push({
     test: /\.(js|tsx?)$/,
-    exclude: /node_modules[/\\](?!react-navigation|victory-native|react-native-vector-icons|react-native-safe-area-view|react-native-elements|react-native-gesture-handler|react-native-google-places-autocomplete|react-native-keyboard-aware-scroll-view|react-native-keychain|react-native-ratings|react-native-reanimated|react-native-image-zoom-viewer|@react-navigation|@invertase|@react-native-community|react-native-fbsdk|react-native-screens|react-native-modalbox|react-native-step-indicator)/,
+    /**
+     * You can exclude the exclude property if you don't want to keep adding individual node_modules
+     * just keep an eye on how it effects your build times, for this example it's negligible */
+    // exclude: /node_modules[/\\](?!@react-navigation|react-native-gesture-handler|react-native-screens)/,
     use: {
       loader: 'babel-loader',
     },
